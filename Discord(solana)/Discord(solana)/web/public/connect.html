@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Phantom Wallet</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #18181b; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+    h1 { margin-bottom: 24px; }
+    #address { margin-top: 20px; font-size: 1.2em; }
+    button { padding: 12px 28px; font-size: 1.1em; border: none; border-radius: 6px; background: #8b5cf6; color: #fff; cursor: pointer; transition: background 0.2s; }
+    button:disabled { background: #444; }
+    #msg { margin-top: 18px; color: #f87171; }
+    a { color: #8b5cf6; }
+  </style>
+</head>
+<body>
+  <h1>Connect Your Phantom Wallet</h1>
+  <button id="connectBtn">Connect Wallet</button>
+  <div id="address"></div>
+  <div id="msg"></div>
+  <script>
+    const connectBtn = document.getElementById('connectBtn');
+    const addressDiv = document.getElementById('address');
+    const msgDiv = document.getElementById('msg');
+    let publicKey = null;
+
+    async function connectWallet() {
+      if (window.solana && window.solana.isPhantom) {
+        try {
+          const resp = await window.solana.connect();
+          publicKey = resp.publicKey.toString();
+          addressDiv.textContent = 'Connected: ' + publicKey;
+          connectBtn.disabled = true;
+          msgDiv.textContent = '';
+        } catch (err) {
+          msgDiv.textContent = 'Connection cancelled or failed.';
+        }
+      } else {
+        msgDiv.innerHTML = 'Phantom Wallet not found. <a href="https://phantom.app/download" target="_blank">Install Phantom</a>';
+      }
+    }
+
+    connectBtn.addEventListener('click', connectWallet);
+  </script>
+</body>
+</html> 

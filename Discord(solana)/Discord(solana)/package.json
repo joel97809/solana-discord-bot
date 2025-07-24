@@ -1,0 +1,22 @@
+{
+  "name": "solana-discord-bundler-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot for Solana transaction bundling with Phantom wallet integration.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1",
+    "@solana/web3.js": "^1.92.2",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2",
+    "node-fetch": "^2.6.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+} 
